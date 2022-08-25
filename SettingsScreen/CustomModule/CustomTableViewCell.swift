@@ -13,6 +13,7 @@ class CustomTableViewCell: UITableViewCell {
         didSet {
             leftIcon.image = itemCell?.leftIcon
             cellTitle.text = itemCell?.cellTitle
+            iconContainer.backgroundColor = itemCell?.backGroundColor
         }
     }
     
@@ -25,13 +26,16 @@ class CustomTableViewCell: UITableViewCell {
     
     private let cellTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15)
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.adjustsFontSizeToFitWidth = true
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let iconContainer: UIView = {
+    public let iconContainer: UIView = {
         let container = UIView()
+        container.layer.cornerRadius = 10
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
@@ -49,17 +53,20 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     private func setupHierarchy() {
-        
+        iconContainer.addSubview(leftIcon)
+        addSubview(iconContainer)
+        addSubview(cellTitle)
     }
+    
     
     private func setupContainerLayout() {
         NSLayoutConstraint.activate([
-            iconContainer.topAnchor.constraint(equalTo: contentView.topAnchor),
-            iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            iconContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             iconContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             iconContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            iconContainer.widthAnchor.constraint(equalToConstant: 20),
-            iconContainer.heightAnchor.constraint(equalToConstant: 20)
+            iconContainer.widthAnchor.constraint(equalToConstant: 30),
+            iconContainer.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
     
@@ -75,7 +82,13 @@ class CustomTableViewCell: UITableViewCell {
     private func setupTitleLayout() {
         NSLayoutConstraint.activate([
             cellTitle.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
-            cellTitle.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor, constant: 20)
+            cellTitle.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor, constant: 40)
         ])
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.accessoryType = .none
+        self.itemCell = nil
     }
 }

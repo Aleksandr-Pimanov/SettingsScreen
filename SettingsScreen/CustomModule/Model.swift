@@ -10,24 +10,25 @@ import UIKit
 struct ItemsCell: Hashable {
     var leftIcon: UIImage
     var cellTitle: String
+    var backGroundColor: UIColor
 }
 
 extension ItemsCell {
     
     static var items: [[ItemsCell]] = [
-        [ItemsCell(leftIcon: UIImage(systemName: "airplane")!, cellTitle: "Aвиарежим")],
-        [ItemsCell(leftIcon: UIImage(systemName: "wifi")!, cellTitle: "Wi-Fi")],
-        [ItemsCell(leftIcon: UIImage(named: "bluetooth")!, cellTitle: "Bluetooth")],
-        [ItemsCell(leftIcon: UIImage(systemName: "antenna.radiowaves.left.and.right")!, cellTitle: "Сотовая связь")],
-        [ItemsCell(leftIcon: UIImage(systemName: "personalhotspot")!, cellTitle: "Режим модема")],
-        [ItemsCell(leftIcon: UIImage(named: "vpn")!, cellTitle: "VPN")],
-        [ItemsCell(leftIcon: UIImage(named: "notification")!, cellTitle: "Уведомления")],
-        [ItemsCell(leftIcon: UIImage(named: "sound")!, cellTitle: "Звуки, тактильные сигналы")],
-        [ItemsCell(leftIcon: UIImage(systemName: "moon.fill")!, cellTitle: "Не беспокоить")],
-        [ItemsCell(leftIcon: UIImage(named: "time")!, cellTitle: "Экранное время")],
-        [ItemsCell(leftIcon: UIImage(systemName: "gear")!, cellTitle: "Основные")],
-        [ItemsCell(leftIcon: UIImage(systemName: "switch.2")!, cellTitle: "Пункт управления")],
-        [ItemsCell(leftIcon: UIImage(systemName: "textformat.size")!, cellTitle: "Экран и яркость")],
-        [ItemsCell(leftIcon: UIImage(systemName: "figure.arms.open")!, cellTitle: "Универсальный доступ")],
+        [ItemsCell(leftIcon: UIImage(systemName: "airplane")!, cellTitle: "Aвиарежим", backGroundColor: .orange)],
+        [ItemsCell(leftIcon: UIImage(systemName: "wifi")!, cellTitle: "Wi-Fi", backGroundColor: .systemBlue)],
+        [ItemsCell(leftIcon: UIImage(named: "bluetooth")!, cellTitle: "Bluetooth", backGroundColor: .systemBlue)],
+        [ItemsCell(leftIcon: UIImage(systemName: "antenna.radiowaves.left.and.right")!, cellTitle: "Сотовая связь", backGroundColor: .systemGreen)],
+        [ItemsCell(leftIcon: UIImage(systemName: "personalhotspot")!, cellTitle: "Режим модема", backGroundColor: .systemGreen)],
+        [ItemsCell(leftIcon: UIImage(named: "vpn")!, cellTitle: "VPN", backGroundColor: .systemBlue)],
+        [ItemsCell(leftIcon: UIImage(named: "notification")!, cellTitle: "Уведомления", backGroundColor: .systemRed)],
+        [ItemsCell(leftIcon: UIImage(named: "sound")!, cellTitle: "Звуки, тактильные сигналы", backGroundColor: .systemPink)],
+        [ItemsCell(leftIcon: UIImage(systemName: "moon.fill")!, cellTitle: "Не беспокоить", backGroundColor: .systemPurple)],
+        [ItemsCell(leftIcon: UIImage(named: "time")!, cellTitle: "Экранное время", backGroundColor: .systemPurple)],
+        [ItemsCell(leftIcon: UIImage(systemName: "gear")!, cellTitle: "Основные", backGroundColor: .systemGray6)],
+        [ItemsCell(leftIcon: UIImage(systemName: "switch.2")!, cellTitle: "Пункт управления", backGroundColor: .systemGray6)],
+        [ItemsCell(leftIcon: UIImage(systemName: "textformat.size")!, cellTitle: "Экран и яркость", backGroundColor: .systemBlue)]
+        //[ItemsCell(leftIcon: UIImage(systemName: "figure.arms.open")!, cellTitle: "Универсальный доступ")]
     ]
 }
