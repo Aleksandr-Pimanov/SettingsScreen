@@ -13,8 +13,9 @@ class SettingsViewController: UIViewController {
         static let identifier = "cell"
     }
     
-    private var items: [[ItemsCell]]?
-    
+    private var items = Section.getModels()
+ // private var items: [[ItemsCell]]?
+        
     private lazy var settingsTableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CellsIdentifier.identifier)
@@ -23,10 +24,10 @@ class SettingsViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        items = ItemsCell.items
+        //items = ItemsCell.items
         view.backgroundColor = .white
         title = "Настройки"
         setupHierarchy()
@@ -50,25 +51,33 @@ class SettingsViewController: UIViewController {
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        
-        let defaultValue = 0
-        return items?.count ?? defaultValue
+        return items.count
+//        let defaultValue = 0
+//        return items?.count ?? defaultValue
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        let defaultValue = 0
-        return items?[section].count ?? defaultValue
+        return items[section].cell.count
+//        let defaultValue = 0
+//        return items?[section].count ?? defaultValue
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.identifier, for: indexPath) as? CustomTableViewCell
-        cell?.itemCell = items?[indexPath.section][indexPath.row]
-        cell?.accessoryType = .detailDisclosureButton
-        return cell ?? UITableViewCell()
+        let model = items[indexPath.section][indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        cell.configure(with: <#T##ItemsCell#>)
+       
+        //      cell.itemCell = items[indexPath.section][indexPath.row]
+      //  cell.accessoryType = .disclosureIndicator
+       return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         50
     }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        guard let cell = cell as? CustomTableViewCell else { return }
+//        cell.configure(model: items[indexPath.row].cell[indexPath.row])
+//    }
 }
