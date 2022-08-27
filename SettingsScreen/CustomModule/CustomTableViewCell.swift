@@ -9,42 +9,37 @@ import UIKit
 
 class CustomTableViewCell: UITableViewCell {
     
-    var itemCell: ItemsCell? {
-        didSet {
-            leftIcon.image = itemCell?.icon
-            cellTitle.text = itemCell?.cellTitle
-            iconContainer.backgroundColor = itemCell?.backGroundColor
-        }
-    }
-    
-    private let leftIcon: UIImageView = {
+    var itemCell: ItemsCell?
+
+    private lazy var leftIcon: UIImageView = {
         let icon = UIImageView()
-        icon.clipsToBounds = true
+        icon.tintColor = .white
+        icon.contentMode = .scaleAspectFit 
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
     }()
     
-    private let cellTitle: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
-        label.adjustsFontSizeToFitWidth = true
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    public let iconContainer: UIView = {
+    private lazy var iconContainer: UIView = {
         let container = UIView()
         container.layer.cornerRadius = 10
+        container.clipsToBounds = true
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
     
-//    private lazy var cellSwitch: UISwitch = {
-//        let mySwitch = UISwitch()
-//        mySwitch.translatesAutoresizingMaskIntoConstraints = false
-//        return mySwitch
-//    }()
+    private lazy var cellTitle: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var cellSwitch: UISwitch = {
+        let mySwitch = UISwitch()
+        mySwitch.translatesAutoresizingMaskIntoConstraints = false
+        return mySwitch
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -52,30 +47,11 @@ class CustomTableViewCell: UITableViewCell {
         setupContainerLayout()
         setupLeftIconLayout()
         setupTitleLayout()
-//        setupSwitchLayout()
+        setupSwitchLayout()
     }
     
     required init?(coder: NSCoder) {
         fatalError()
-    }
-    
-    private func setupHierarchy() {
-        iconContainer.addSubview(leftIcon)
-        addSubview(iconContainer)
-        addSubview(cellTitle)
-//        addSubview(cellSwitch)
-    }
-    
-    private func setupContainerLayout() {
-        NSLayoutConstraint.activate([
-//            iconContainer.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-//            iconContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            iconContainer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            iconContainer.widthAnchor.constraint(equalToConstant: 30),
-            iconContainer.heightAnchor.constraint(equalToConstant: 30)
-        ])
     }
     
     func configure(with model: ItemsCell) {
@@ -85,8 +61,24 @@ class CustomTableViewCell: UITableViewCell {
         
         guard let itemCell = itemCell else { return }
         if itemCell.isDisplaySwitch {
-//            addSubview(cellSwitch)
+            addSubview(cellSwitch)
         }
+    }
+    
+    private func setupHierarchy() {
+        iconContainer.addSubview(leftIcon)
+        addSubview(iconContainer)
+        addSubview(cellTitle)
+        addSubview(cellSwitch)
+    }
+    
+    private func setupContainerLayout() {
+        NSLayoutConstraint.activate([
+            iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+            iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            iconContainer.widthAnchor.constraint(equalToConstant: 30),
+            iconContainer.heightAnchor.constraint(equalToConstant: 30)
+        ])
     }
     
     private func setupLeftIconLayout() {
@@ -105,17 +97,16 @@ class CustomTableViewCell: UITableViewCell {
         ])
     }
     
-//    private func setupSwitchLayout() {
-//        NSLayoutConstraint.activate([
-//            cellSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//            cellSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
-//        ])
-//    }
+    private func setupSwitchLayout() {
+        NSLayoutConstraint.activate([
+            cellSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
         self.accessoryType = .none
         self.itemCell = nil
-//        cellSwitch.removeFromSuperview()
     }
 }

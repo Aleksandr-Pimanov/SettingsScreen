@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct ItemsCell: Hashable {
+struct ItemsCell {
     var icon: UIImage
     var cellTitle: String
     var backGroundColor: UIColor
@@ -20,38 +20,27 @@ struct Section {
     
     static func getModels() -> [Section] {
         return [
-            Section(cell: [ItemsCell(icon: UIImage(systemName: "airplane")!, cellTitle: "ХУЙ", backGroundColor: UIColor.blue, isDisplaySwitch: true), ItemsCell(icon: UIImage(systemName: "airplane")!, cellTitle: "ХУЙ", backGroundColor: UIColor.blue, isDisplaySwitch: true), ItemsCell(icon: UIImage(systemName: "airplane")!, cellTitle: "ХУЙ", backGroundColor: UIColor.blue, isDisplaySwitch: true)
-//
-//                           ItemsCell(icon: UIImage(systemName: "airplane"), cellTitle: <#T##String#>, backGroundColor: UIImage(systemName: "airplane"), isDisplaySwitch: <#T##Bool#>), ItemsCell(icon: UIImage(systemName: "airplane"), cellTitle: <#T##String#>, backGroundColor: UIImage(systemName: "airplane"), isDisplaySwitch: <#T##Bool#>),
-//                ItemsCell(icon: UIImage(systemName: "airplane"), cellTitle: <#T##String#>, backGroundColor: <#T##UIColor#>, isDisplaySwitch: <#T##Bool#>)], header: <#T##String?#>)
-//
-//            Section(cell: [ItemsCell(icon: <#T##UIImage#>, cellTitle: <#T##String#>, backGroundColor: <#T##UIColor#>, isDisplaySwitch: <#T##Bool#>)], header: <#T##String?#>),
-//
-//            Section(cell: [ItemsCell(icon: <#T##UIImage#>, cellTitle: <#T##String#>, backGroundColor: <#T##UIColor#>, isDisplaySwitch: <#T##Bool#>)], header: <#T##String?#>)
-//
-//            Section(cell: <#T##[ItemsCell]#>, header: <#T##String?#>)
-        ]
-        )
+            Section(cell: [
+                ItemsCell(icon: UIImage(systemName: "airplane")!, cellTitle: "Aвиарежим", backGroundColor: .orange, isDisplaySwitch: true),
+                ItemsCell(icon: UIImage(systemName: "wifi")!, cellTitle: "Wi-Fi", backGroundColor: .systemBlue, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(named: "bluetooth")!, cellTitle: "Bluetooth", backGroundColor: .systemBlue, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(systemName: "antenna.radiowaves.left.and.right")!, cellTitle: "Режим модема", backGroundColor: .systemGreen, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(named: "vpn")!, cellTitle: "VPN", backGroundColor: .systemBlue, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(named: "notification")!, cellTitle: "Уведомления", backGroundColor: .systemRed, isDisplaySwitch: false)], header: nil),
+            
+            Section(cell: [
+                ItemsCell(icon: UIImage(named: "sound")!, cellTitle: "Уведомления", backGroundColor: .systemRed, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(named: "sound")!, cellTitle: "Звуки, тактильные сигналы", backGroundColor: .systemPink, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(systemName: "moon.fill")!, cellTitle: "Не беспокоить", backGroundColor: .systemPurple, isDisplaySwitch: false),
+                ItemsCell(icon:  UIImage(named: "time")!, cellTitle: "Экранное время", backGroundColor: .systemPurple, isDisplaySwitch: false)], header: nil),
+            
+            Section(cell: [
+                ItemsCell(icon: UIImage(systemName: "gear")!, cellTitle: "Основные", backGroundColor: .systemGray2, isDisplaySwitch: true),
+                ItemsCell(icon: UIImage(systemName: "switch.2")!, cellTitle: "Пункт управления", backGroundColor: .systemGray2, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(systemName: "textformat.size")!, cellTitle: "Экран и яркость", backGroundColor: .systemBlue, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(systemName: "figure.stand")!, cellTitle: "Универсальный доступ", backGroundColor: .systemBlue, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(systemName: "faceid")!, cellTitle: "Face ID и код-пароль", backGroundColor: .systemGreen, isDisplaySwitch: false),
+                ItemsCell(icon: UIImage(systemName: "battery.100")!, cellTitle: "Аккумулятор", backGroundColor: .systemGreen, isDisplaySwitch: false)], header: nil)
         ]
     }
 }
-
-//extension ItemsCell {
-//
-//    static var items: [[ItemsCell]] = [
-//        [ItemsCell(icon: UIImage(systemName: "airplane")!, cellTitle: "Aвиарежим", backGroundColor: .orange)],
-//        [ItemsCell(icon: UIImage(systemName: "wifi")!, cellTitle: "Wi-Fi", backGroundColor: .systemBlue)],
-//        [ItemsCell(icon: UIImage(named: "bluetooth")!, cellTitle: "Bluetooth", backGroundColor: .systemBlue)],
-//        [ItemsCell(icon: UIImage(systemName: "antenna.radiowaves.left.and.right")!, cellTitle: "Сотовая связь", backGroundColor: .systemGreen)],
-//        [ItemsCell(icon: UIImage(systemName: "personalhotspot")!, cellTitle: "Режим модема", backGroundColor: .systemGreen)],
-//        [ItemsCell(icon: UIImage(named: "vpn")!, cellTitle: "VPN", backGroundColor: .systemBlue)],
-//        [ItemsCell(icon: UIImage(named: "notification")!, cellTitle: "Уведомления", backGroundColor: .systemRed)],
-//        [ItemsCell(icon: UIImage(named: "sound")!, cellTitle: "Звуки, тактильные сигналы", backGroundColor: .systemPink)],
-//        [ItemsCell(icon: UIImage(systemName: "moon.fill")!, cellTitle: "Не беспокоить", backGroundColor: .systemPurple)],
-//        [ItemsCell(icon: UIImage(named: "time")!, cellTitle: "Экранное время", backGroundColor: .systemPurple)],
-//        [ItemsCell(icon: UIImage(systemName: "gear")!, cellTitle: "Основные", backGroundColor: .systemGray6)],
-//        [ItemsCell(icon: UIImage(systemName: "switch.2")!, cellTitle: "Пункт управления", backGroundColor: .systemGray6)],
-//        [ItemsCell(icon: UIImage(systemName: "textformat.size")!, cellTitle: "Экран и яркость", backGroundColor: .systemBlue)],
-////        [ItemsCell(leftIcon: UIImage(systemName: "figure.arms.open")!, cellTitle: "Универсальный доступ")]
-//    ]
-//}

@@ -8,7 +8,7 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-    
+        
     struct CellsIdentifier {
         static let identifier = "cell"
     }
@@ -24,7 +24,7 @@ class SettingsViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-  
+      
     override func viewDidLoad() {
         super.viewDidLoad()
         //items = ItemsCell.items
@@ -63,9 +63,9 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = items[indexPath.section][indexPath.row]
+        let model = items[indexPath.section].cell[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
-        cell.configure(with: <#T##ItemsCell#>)
+        cell.configure(with: model)
        
         //      cell.itemCell = items[indexPath.section][indexPath.row]
       //  cell.accessoryType = .disclosureIndicator
