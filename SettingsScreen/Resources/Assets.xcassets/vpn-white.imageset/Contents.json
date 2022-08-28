@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "icons8-vpn-status-bar-icon-50.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "time.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

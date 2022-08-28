@@ -10,18 +10,28 @@ import UIKit
 class CustomTableViewCell: UITableViewCell {
     
     var itemCell: ItemsCell?
-
+    
+      var statusLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 17)
+        label.textColor = .systemGray
+        label.adjustsFontSizeToFitWidth = true
+        label.translatesAutoresizingMaskIntoConstraints = false
+       return label
+    }()
+    
     private lazy var leftIcon: UIImageView = {
         let icon = UIImageView()
         icon.tintColor = .white
-        icon.contentMode = .scaleAspectFit 
+        icon.contentMode = .scaleAspectFit
+        icon.clipsToBounds = true
         icon.translatesAutoresizingMaskIntoConstraints = false
         return icon
     }()
     
     private lazy var iconContainer: UIView = {
         let container = UIView()
-        container.layer.cornerRadius = 10
+        container.layer.cornerRadius = 8
         container.clipsToBounds = true
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
@@ -29,7 +39,7 @@ class CustomTableViewCell: UITableViewCell {
     
     private lazy var cellTitle: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 17)
         label.adjustsFontSizeToFitWidth = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -48,6 +58,7 @@ class CustomTableViewCell: UITableViewCell {
         setupLeftIconLayout()
         setupTitleLayout()
         setupSwitchLayout()
+        setupStatusLabelLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -58,11 +69,12 @@ class CustomTableViewCell: UITableViewCell {
         leftIcon.image = model.icon
         cellTitle.text = model.cellTitle
         iconContainer.backgroundColor = model.backGroundColor
+        cellSwitch.isHidden = model.isSwitchHidden
+        statusLabel.isHidden = model.isStatusLabelHidden
         
-        guard let itemCell = itemCell else { return }
-        if itemCell.isDisplaySwitch {
-            addSubview(cellSwitch)
-        }
+        if model.isSwitchHidden {
+            accessoryType = .disclosureIndicator
+        } 
     }
     
     private func setupHierarchy() {
@@ -70,23 +82,36 @@ class CustomTableViewCell: UITableViewCell {
         addSubview(iconContainer)
         addSubview(cellTitle)
         addSubview(cellSwitch)
+        addSubview(statusLabel)
+    }
+    
+    private func setupStatusLabelLayout() {
+        NSLayoutConstraint.activate([
+            statusLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            statusLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
+        ])
     }
     
     private func setupContainerLayout() {
         NSLayoutConstraint.activate([
             iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
             iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            iconContainer.widthAnchor.constraint(equalToConstant: 30),
-            iconContainer.heightAnchor.constraint(equalToConstant: 30)
+            iconContainer.widthAnchor.constraint(equalToConstant: 25),
+            iconContainer.heightAnchor.constraint(equalToConstant: 25)
         ])
     }
     
     private func setupLeftIconLayout() {
         NSLayoutConstraint.activate([
-            leftIcon.topAnchor.constraint(equalTo: iconContainer.topAnchor),
-            leftIcon.trailingAnchor.constraint(equalTo: iconContainer.trailingAnchor),
-            leftIcon.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor),
-            leftIcon.bottomAnchor.constraint(equalTo: iconContainer.bottomAnchor)
+            leftIcon.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor),
+            leftIcon.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
+            leftIcon.widthAnchor.constraint(equalToConstant: 20),
+            leftIcon.heightAnchor.constraint(equalToConstant: 20)
+//            leftIcon.topAnchor.constraint(equalTo: iconContainer.topAnchor),
+//            leftIcon.trailingAnchor.constraint(equalTo: iconContainer.trailingAnchor),
+//            leftIcon.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor),
+//            leftIcon.bottomAnchor.constraint(equalTo: iconContainer.bottomAnchor),
+//            leftIcon.widthAnchor.constraint(equalTo: iconContainer.heightAnchor)
         ])
     }
     
@@ -99,7 +124,7 @@ class CustomTableViewCell: UITableViewCell {
     
     private func setupSwitchLayout() {
         NSLayoutConstraint.activate([
-            cellSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            cellSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             cellSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
