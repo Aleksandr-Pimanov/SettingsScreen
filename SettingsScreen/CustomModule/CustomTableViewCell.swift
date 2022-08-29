@@ -20,6 +20,14 @@ class CustomTableViewCell: UITableViewCell {
        return label
     }()
     
+    private lazy var infoAboutAccount: UILabel = {
+        let info = UILabel()
+        info.font = UIFont.systemFont(ofSize: 14)
+        info.adjustsFontSizeToFitWidth = true
+        info.translatesAutoresizingMaskIntoConstraints = false
+        return info
+    }()
+    
     private lazy var leftIcon: UIImageView = {
         let icon = UIImageView()
         icon.tintColor = .white
@@ -51,14 +59,20 @@ class CustomTableViewCell: UITableViewCell {
         return mySwitch
     }()
     
+    private lazy var notificationIcon: UIImageView = {
+        let icon = UIImageView()
+        icon.contentMode = .scaleAspectFit
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        return icon
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupHierarchy()
-        setupContainerLayout()
-        setupLeftIconLayout()
         setupTitleLayout()
         setupSwitchLayout()
         setupStatusLabelLayout()
+        setupNotificationLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -70,19 +84,23 @@ class CustomTableViewCell: UITableViewCell {
         cellTitle.text = model.cellTitle
         iconContainer.backgroundColor = model.backGroundColor
         cellSwitch.isHidden = model.isSwitchHidden
-        statusLabel.isHidden = model.isStatusLabelHidden
+        statusLabel.text = model.statusLabel
+        notificationIcon.image = model.notification
         
         if model.isSwitchHidden {
             accessoryType = .disclosureIndicator
-        } 
+        }
+        
+        setupFirstImageConstraint(model.isFirstSection ?? false)
     }
     
     private func setupHierarchy() {
         iconContainer.addSubview(leftIcon)
-        addSubview(iconContainer)
-        addSubview(cellTitle)
-        addSubview(cellSwitch)
-        addSubview(statusLabel)
+        contentView.addSubview(iconContainer)
+        contentView.addSubview(cellTitle)
+        contentView.addSubview(cellSwitch)
+        contentView.addSubview(statusLabel)
+        contentView.addSubview(notificationIcon)
     }
     
     private func setupStatusLabelLayout() {
@@ -92,28 +110,10 @@ class CustomTableViewCell: UITableViewCell {
         ])
     }
     
-    private func setupContainerLayout() {
-        NSLayoutConstraint.activate([
-            iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
-            iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            iconContainer.widthAnchor.constraint(equalToConstant: 25),
-            iconContainer.heightAnchor.constraint(equalToConstant: 25)
-        ])
-    }
-    
-    private func setupLeftIconLayout() {
-        NSLayoutConstraint.activate([
-            leftIcon.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor),
-            leftIcon.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
-            leftIcon.widthAnchor.constraint(equalToConstant: 20),
-            leftIcon.heightAnchor.constraint(equalToConstant: 20)
-        ])
-    }
-    
     private func setupTitleLayout() {
         NSLayoutConstraint.activate([
             cellTitle.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
-            cellTitle.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor, constant: 40)
+            cellTitle.leadingAnchor.constraint(equalTo: iconContainer.trailingAnchor, constant: 10)
         ])
     }
     
@@ -122,6 +122,42 @@ class CustomTableViewCell: UITableViewCell {
             cellSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             cellSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
+    }
+    
+    private func setupNotificationLayout() {
+        NSLayoutConstraint.activate([
+            notificationIcon.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            notificationIcon.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
+        ])
+    }
+    
+    private func setupFirstImageConstraint(_ isFirstIcon: Bool) {
+        
+        if isFirstIcon {
+            NSLayoutConstraint.activate([
+                iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+                iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                iconContainer.widthAnchor.constraint(equalToConstant: 65),
+                iconContainer.heightAnchor.constraint(equalToConstant: 65),
+                
+                leftIcon.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor),
+                leftIcon.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
+                leftIcon.widthAnchor.constraint(equalToConstant: 50),
+                leftIcon.heightAnchor.constraint(equalToConstant: 50)
+            ])
+        } else {
+            NSLayoutConstraint.activate([
+                iconContainer.centerYAnchor.constraint(equalTo: centerYAnchor),
+                iconContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+                iconContainer.widthAnchor.constraint(equalToConstant: 25),
+                iconContainer.heightAnchor.constraint(equalToConstant: 25),
+                
+                leftIcon.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor),
+                leftIcon.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
+                leftIcon.widthAnchor.constraint(equalToConstant: 20),
+                leftIcon.heightAnchor.constraint(equalToConstant: 20)
+            ])
+        }
     }
     
     override func prepareForReuse() {

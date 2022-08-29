@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6605BAD28BD451100531531 /* Extension for VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6605BAC28BD451100531531 /* Extension for VC.swift */; };
 		B69D477D28BBB0C800F1E99A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69D477C28BBB0C800F1E99A /* DetailsViewController.swift */; };
 		B6DDB53028B753A900941549 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDB52F28B753A900941549 /* AppDelegate.swift */; };
 		B6DDB53228B753A900941549 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDB53128B753A900941549 /* SceneDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B6605BAC28BD451100531531 /* Extension for VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension for VC.swift"; sourceTree = "<group>"; };
 		B69D477C28BBB0C800F1E99A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B6DDB52C28B753A900941549 /* SettingsScreen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SettingsScreen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DDB52F28B753A900941549 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B6605BAB28BD44A300531531 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B6605BAC28BD451100531531 /* Extension for VC.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		B6DDB52328B753A900941549 = {
 			isa = PBXGroup;
 			children = (
@@ -61,8 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				B6DDB54328B75FDC00941549 /* Application */,
+				B6605BAB28BD44A300531531 /* Extensions */,
 				B6DDB54528B760DD00941549 /* CustomModule */,
-				B69D477C28BBB0C800F1E99A /* DetailsViewController.swift */,
 				B6DDB54428B7603300941549 /* Resources */,
 			);
 			path = SettingsScreen;
@@ -92,6 +102,7 @@
 			children = (
 				B6DDB54628B7614C00941549 /* SettingsViewController.swift */,
 				B6DDB54828B7617400941549 /* CustomTableViewCell.swift */,
+				B69D477C28BBB0C800F1E99A /* DetailsViewController.swift */,
 				B6DDB54A28B7618200941549 /* Model.swift */,
 			);
 			path = CustomModule;
@@ -167,6 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6605BAD28BD451100531531 /* Extension for VC.swift in Sources */,
 				B6DDB54928B7617400941549 /* CustomTableViewCell.swift in Sources */,
 				B6DDB53028B753A900941549 /* AppDelegate.swift in Sources */,
 				B6DDB54B28B7618200941549 /* Model.swift in Sources */,
