@@ -21,7 +21,7 @@ struct Section {
     static func getModels() -> [Section] {
         return [
             Section(cell: [
-                ItemsCell(icon: UIImage(named: "back")!, cellTitle: "Александр Пиманов", backGroundColor: .clear, isSwitchHidden: true, isStatusLabelHidden: true)]),
+                ItemsCell(icon: UIImage(named: "back-pic")!, cellTitle: "Александр Пиманов", backGroundColor: .clear, isSwitchHidden: true, isStatusLabelHidden: true)]),
             
             Section(cell: [
                 ItemsCell(icon: UIImage(systemName: "airplane")!, cellTitle: "Aвиарежим", backGroundColor: .orange, isSwitchHidden: false, isStatusLabelHidden: true),

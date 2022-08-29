@@ -11,7 +11,7 @@ class CustomTableViewCell: UITableViewCell {
     
     var itemCell: ItemsCell?
     
-      var statusLabel: UILabel = {
+    var statusLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
         label.textColor = .systemGray
@@ -107,11 +107,6 @@ class CustomTableViewCell: UITableViewCell {
             leftIcon.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor),
             leftIcon.widthAnchor.constraint(equalToConstant: 20),
             leftIcon.heightAnchor.constraint(equalToConstant: 20)
-//            leftIcon.topAnchor.constraint(equalTo: iconContainer.topAnchor),
-//            leftIcon.trailingAnchor.constraint(equalTo: iconContainer.trailingAnchor),
-//            leftIcon.leadingAnchor.constraint(equalTo: iconContainer.leadingAnchor),
-//            leftIcon.bottomAnchor.constraint(equalTo: iconContainer.bottomAnchor),
-//            leftIcon.widthAnchor.constraint(equalTo: iconContainer.heightAnchor)
         ])
     }
     

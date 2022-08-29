@@ -14,7 +14,7 @@ class SettingsViewController: UIViewController {
     private var items = Section.getModels()
         
     private lazy var settingsTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: SettingsViewController.identifier)
         tableView.dataSource = self
         tableView.delegate = self
@@ -62,13 +62,13 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.section == 1 && indexPath.row == 2 {
             cell.statusLabel.text = "Вкл."
     }
-       return cell
+        return cell
 }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         if indexPath.section == 0 {
-            return 100
+            return 80
         }
         return 50
     }
@@ -80,6 +80,15 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+        let viewController = DetailsViewController()
+        viewController.itemCell = items[indexPath.section].cell[indexPath.row]
+        let isPushing = items[indexPath.section].cell[indexPath.row].isSwitchHidden
+        
+        if isPushing {
+            tableView.deselectRow(at: indexPath, animated: true)
+            navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
     }
 }
