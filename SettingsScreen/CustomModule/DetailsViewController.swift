@@ -13,8 +13,8 @@ class DetailsViewController: UIViewController {
     
     private lazy var cellTitle: UILabel = {
         let title = UILabel()
+        title.textColor = .white
         title.font = UIFont.systemFont(ofSize: 25, weight: .bold)
-        title.tintColor = .white
         title.adjustsFontSizeToFitWidth = true
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
@@ -22,7 +22,7 @@ class DetailsViewController: UIViewController {
     
     private lazy var icon: UIImageView = {
         let icon = UIImageView()
-        icon.tintColor = .black
+        icon.tintColor = .white
         icon.contentMode = .scaleAspectFit
         icon.clipsToBounds = true
         icon.translatesAutoresizingMaskIntoConstraints = false
@@ -31,7 +31,7 @@ class DetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         setupHierarchy()
         configure()
         setupIconLayout()

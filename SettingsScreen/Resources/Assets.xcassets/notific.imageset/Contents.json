@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "back-pic.jpeg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "notific.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
