@@ -8,17 +8,14 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-        
-    struct CellsIdentifier {
-        static let identifier = "cell"
-    }
+    
+    private static let identifier = "CustomTableViewCell"
     
     private var items = Section.getModels()
- // private var items: [[ItemsCell]]?
         
     private lazy var settingsTableView: UITableView = {
-        let tableView = UITableView(frame: .zero, style: .grouped)
-        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CellsIdentifier.identifier)
+        let tableView = UITableView(frame: .zero, style: .insetGrouped)
+        tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: SettingsViewController.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -27,18 +24,17 @@ class SettingsViewController: UIViewController {
       
     override func viewDidLoad() {
         super.viewDidLoad()
-        //items = ItemsCell.items
         view.backgroundColor = .white
         title = "Настройки"
         setupHierarchy()
-        setupLayout()
+        setupTableViewLayout()
     }
     
     private func setupHierarchy() {
         view.addSubview(settingsTableView)
     }
     
-    private func setupLayout() {
+    private func setupTableViewLayout() {
         NSLayoutConstraint.activate([
             settingsTableView.topAnchor.constraint(equalTo: view.topAnchor),
             settingsTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -52,32 +48,47 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return items.count
-//        let defaultValue = 0
-//        return items?.count ?? defaultValue
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items[section].cell.count
-//        let defaultValue = 0
-//        return items?[section].count ?? defaultValue
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = items[indexPath.section].cell[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellsIdentifier.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
-        cell.configure(with: model)
-       
-        //      cell.itemCell = items[indexPath.section][indexPath.row]
-      //  cell.accessoryType = .disclosureIndicator
-       return cell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SettingsViewController.identifier, for: indexPath) as? CustomTableViewCell else { return UITableViewCell() }
+        
+        if indexPath.section == 1 && indexPath.row == 1 {
+            cell.statusLabel.text = "Не подключено"
+        } else if indexPath.section == 1 && indexPath.row == 2 {
+            cell.statusLabel.text = "Вкл."
     }
+        return cell
+}
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
+        
+        if indexPath.section == 0 {
+            return 80
+        }
+        return 50
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        guard let cell = cell as? CustomTableViewCell else { return }
-//        cell.configure(model: items[indexPath.row].cell[indexPath.row])
-//    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? CustomTableViewCell else { return }
+        let model = items[indexPath.section].cell[indexPath.row]
+        cell.configure(with: model)
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewController = DetailsViewController()
+        viewController.itemCell = items[indexPath.section].cell[indexPath.row]
+        let isPushing = items[indexPath.section].cell[indexPath.row].isSwitchHidden
+        
+        if isPushing {
+            tableView.deselectRow(at: indexPath, animated: true)
+            navigationController?.pushViewController(viewController, animated: true)
+        } else {
+            tableView.deselectRow(at: indexPath, animated: false)
+        }
+    }
 }
